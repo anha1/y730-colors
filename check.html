@@ -1,0 +1,46 @@
+<html>
+
+<head>
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+    integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div id="out">
+  </div>
+
+  <script>
+    var color = function (fl) {
+      var i = parseInt(fl);
+      if (i > 255) return "ff";
+      if (i < 0) return "00"
+      var hex = i.toString(16);
+      if (hex.length == 1) {
+        return "0" + hex;
+      } else {
+        return hex;
+      }
+    }
+
+    $(document).ready(function () {
+      for (t = 50; t < 99; t += 3) {
+        var r = 0;
+        var g = 0;
+        var b = 0;
+
+        r = (t - 45) * 5.5;
+        g = 0;
+        b = 420 - t * 2.6;
+
+        var rgb = color(r) + color(g) + color(b);
+
+
+        var div = $("<div  style='color: yellow;background-color: #" + rgb + "; padding: 3px; width: 120px;'>" + t + "&nbsp;" + rgb + "</div>");
+        $("#out").append(div);
+      }
+    });
+  </script>
+
+</body>
+
+</html>

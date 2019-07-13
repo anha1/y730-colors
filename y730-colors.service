@@ -1,0 +1,12 @@
+[Unit]
+Description=Y730 colors
+Wants=ckb-next-daemon.service
+After=multi-user.target ckb-next-daemon.service
+
+[Service]
+Type=simple
+ExecStart=/home/user/projects/y730-colors/y730-colors.py
+StandardInput=tty-force
+
+[Install]
+WantedBy=multi-user.target
