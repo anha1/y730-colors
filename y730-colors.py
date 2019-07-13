@@ -11,7 +11,7 @@ def color(inp):
     return int(inp)
 
 def t2color(t):
-    r = (t - 45) * 5.5;
+    r = (t - 45) * 2.5;
     g = 0;
     b = 420 - t * 2.6;
     return "%0.2X%0.2X%0.2X" % (color(r), color(g), color(b))    
@@ -33,10 +33,11 @@ ratio = 0.98
 iratio = 1 - ratio
 phase = 0;
 frame = 0.1
+itemp = 5 / frame
 
 while True:
     i = i + 1
-    if i >= 20:
+    if i >= itemp:
         i = 0
         tcurr = systemp()
         """
@@ -50,9 +51,9 @@ while True:
 
     t = ratio * t + iratio * tcurr
 
-    #t = 90
+    #t = 55
 
-    mul =  max(1.3,  (t - 35) / 15.0);
+    mul =  max(1.3,  (t - 40) / 11.0);
 
     phase = phase + mul * frame; 
     
@@ -61,13 +62,13 @@ while True:
     scale = pow(sin(x), 4)
 
     rgb1 = t2color(t)
-    rgb2 = t2color(60 + 25 * scale)
-    rgb3 = t2color(60 + 50 * scale)
+    rgb2 = t2color(t + 30 * scale)
+    rgb3 = t2color(t + 66 * scale)
 
     key = int(t / 10)
 
     #print( "t=%s color=%s" % (t, rgb1))
-    cmd = "rgb %s g,y,u,i,l,o,m,n,b,7,8,space2:%s h,j,k:%s\n" % (rgb1, rgb2, rgb3)    
+    cmd = "rgb %s g,y,u,i,l,o,m,n,b,7,8,f7,f8,space2:%s h,j,k:%s\n" % (rgb1, rgb2, rgb3)    
     #print(cmd)
     os.write(dev, cmd.encode())
     time.sleep(frame)
